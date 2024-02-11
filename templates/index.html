@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>LPBF API</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="login">
+        <h1><center>Laser Powder Bed Fusion: Mechanical Properties Prediction</center></h1>
+
+        <h3>Enter your LPBF process parameters</h3>
+
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('predict')}}" method="post">
+            <label for="Material">Material:</label>
+            <select name="Material" required="required">
+                <option value="Null">Select</option>
+                <option value=0>Inconel 718</option>
+                <option value=1>316 L</option>
+                <option value=2>Ti-6Al-4V</option>
+                <option value=3>Inconel 625</option>
+                <option value=4>Al-Si-10Mg</option>
+                <option value=5>Hastelloy x</option>
+              
+            </select><br>
+
+            <label for="Scanning strategy">Scanning strategy:</label>
+            <select name="Scanning strategy" required="required">
+                <option value="Null">Select</option>
+                <option value=0>Chessboard Scan</option>
+                <option value=1>Island Scan</option>
+                <option value=2>Meander Scan</option>
+                <option value=3>Bidirectional Scan</option>
+                <option value=4>Cross Scan</option>
+                <option value=5>Stripe Scan</option>
+              
+            </select><br>
+            <input type="text" name="Laser power (W)" placeholder="Laser power (W)" required="required" /><br>
+            <input type="text" name="Laser speed (mm/s)" placeholder="Laser speed (mm/s)" required="required" /><br>
+            <input type="text" name="Layer thickness (um)" placeholder="Layer thickness (um)" required="required" /><br>
+            <input type="text" name="Hatch spacing (um)" placeholder="Hatch spacing (um)" required="required" /><br>
+            <input type="text" name="Beam size (um)" placeholder="Beam size (um)" required="required" /><br>
+        
+            <input type="text" name="Linear energy density (J/m)" placeholder="Linear energy density (J/m)" required="required" /><br>
+            <input type="text" name="Volumetric energy density (J/mm3)" placeholder="Volumetric energy density (J/mm3)" required="required" /><br>
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+
+        <br>
+        <br>
+
+    </div>
+
+    <!-- Display individual predicted values -->
+    <h2>Predicted Mechanical Properties are</h2>
+    <table border="1">
+        <tr>
+            <th>Yield strength(MPa)</th>
+            <th>Ultimate Tensile Strength (MPa)</th>
+            <th>Elongation (%)</th>
+        </tr>
+        <tr>
+            <td><center>{{ prediction_1 }}</center></td>
+            <td><center>{{ prediction_2 }}</center></td>
+            <td><center>{{ prediction_3 }}</center></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
