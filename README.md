@@ -2,6 +2,6 @@
 
 # lab-conda
 
-Command to run demo.py file:
+Command to run app.py file:
 
-`python demo.py`
+`python app.py`
